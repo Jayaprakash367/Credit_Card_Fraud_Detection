@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Suspicious Accounts - FraudGuard{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Page Header -->
+    <div class="mb-4">
+        <h2 class="mb-1">Suspicious Accounts</h2>
+        <p class="text-muted mb-0">Accounts flagged for improper behavior and fraudulent transactions</p>
+    </div>
+    
+    <!-- Summary Cards -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="stat-card">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <div class="stat-value text-danger">{{ accounts|length }}</div>
+                        <div class="stat-label">Suspicious Accounts</div>
+                    </div>
+                    <div class="stat-icon bg-danger bg-opacity-10 text-danger">
+                        <i class="bi bi-person-exclamation"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <div class="stat-value text-warning">{{ accounts|sum(attribute='fraud_count') }}</div>
+                        <div class="stat-label">Total Fraud Transactions</div>
+                    </div>
+                    <div class="stat-icon bg-warning bg-opacity-10 text-warning">
+                        <i class="bi bi-exclamation-triangle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <div class="stat-value text-danger">${{ "{:,.0f}".format(accounts|sum(attribute='total_amount')) }}</div>
+                        <div class="stat-label">Total Fraud Amount</div>
+                    </div>
+                    <div class="stat-icon bg-danger bg-opacity-10 text-danger">
+                        <i class="bi bi-currency-dollar"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Accounts List -->
+    <div class="row g-4">
+        {% for account in accounts %}
+        <div class="col-md-6">
+            <div class="table-card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="mb-0">
+                            {% if 'Suspicious' in account.name or 'Anonymous' in account.name %}
+                            <i class="bi bi-exclamation-triangle text-danger me-2"></i>
+                            {% else %}
+                            <i class="bi bi-person-fill text-warning me-2"></i>
+                            {% endif %}
+                            {{ account.name }}
+                        </h5>
+                    </div>
+                    <span class="badge bg-danger">{{ account.fraud_count }} Fraud Transactions</span>
+                </div>
+                <div class="card-body">
+                    <!-- Stats Row -->
+                    <div class="row text-center mb-4">
+                        <div class="col-4">
+                            <div class="border-end">
+                                <h4 class="text-danger mb-0">${{ "{:,.0f}".format(account.total_amount) }}</h4>
+                                <small class="text-muted">Total Amount</small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="border-end">
+                                <h4 class="mb-0">${{ "{:,.0f}".format(account.avg_amount) }}</h4>
+                                <small class="text-muted">Avg Amount</small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <h4 class="{% if account.avg_risk_score >= 70 %}text-danger{% elif account.avg_risk_score >= 40 %}text-warning{% else %}text-success{% endif %} mb-0">
+                                {{ account.avg_risk_score }}%
+                            </h4>
+                            <small class="text-muted">Avg Risk Score</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Fraud Reasons -->
+                    <h6 class="text-muted mb-2">Fraud Reasons</h6>
+                    <div class="mb-3">
+                        {% for reason, count in account.fraud_reasons.items() %}
+                        <span class="badge bg-danger me-1 mb-1">{{ reason }} ({{ count }})</span>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Locations Used -->
+                    <h6 class="text-muted mb-2">Locations</h6>
+                    <div>
+                        {% for location, count in account.locations.items() %}
+                        <span class="badge {% if location in ['Unknown Location', 'Suspicious IP'] %}bg-danger{% else %}bg-secondary{% endif %} me-1 mb-1">
+                            <i class="bi bi-geo-alt me-1"></i>{{ location }} ({{ count }})
+                        </span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent">
+                    <a href="{{ url_for('transactions') }}?search={{ account.name }}" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-eye me-1"></i>View Transactions
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12">
+            <div class="table-card">
+                <div class="card-body text-center py-5">
+                    <i class="bi bi-shield-check display-1 text-success mb-3"></i>
+                    <h4>No Suspicious Accounts Found</h4>
+                    <p class="text-muted">All accounts appear to be legitimate</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

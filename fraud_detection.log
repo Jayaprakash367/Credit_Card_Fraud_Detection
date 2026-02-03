@@ -1,0 +1,156 @@
+2026-01-30 21:33:01,610 - ERROR - Error loading model/data: Can't get attribute '_RemainderColsList' on <module 'sklearn.compose._column_transformer' from 'C:\\Users\\jayaprakash.k\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\sklearn\\compose\\_column_transformer.py'>
+2026-01-30 21:33:01,711 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.89.249.78:5000
+2026-01-30 21:33:01,712 - INFO - [33mPress CTRL+C to quit[0m
+2026-01-30 21:33:01,716 - INFO -  * Restarting with stat
+2026-01-30 21:33:01,717 - INFO -  * Restarting with stat
+2026-01-30 21:33:06,902 - ERROR - Error loading model/data: Can't get attribute '_RemainderColsList' on <module 'sklearn.compose._column_transformer' from 'C:\\Users\\jayaprakash.k\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\sklearn\\compose\\_column_transformer.py'>
+2026-01-30 21:33:06,908 - ERROR - Error loading model/data: Can't get attribute '_RemainderColsList' on <module 'sklearn.compose._column_transformer' from 'C:\\Users\\jayaprakash.k\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\sklearn\\compose\\_column_transformer.py'>
+2026-01-30 21:33:06,933 - WARNING -  * Debugger is active!
+2026-01-30 21:33:06,938 - WARNING -  * Debugger is active!
+2026-01-30 21:33:06,951 - INFO -  * Debugger PIN: 125-407-473
+2026-01-30 21:33:06,955 - INFO -  * Debugger PIN: 125-407-473
+2026-01-30 21:33:23,609 - INFO - 127.0.0.1 - - [30/Jan/2026 21:33:23] "GET / HTTP/1.1" 200 -
+2026-01-30 21:33:23,871 - INFO - 127.0.0.1 - - [30/Jan/2026 21:33:23] "GET /static/js/main.js HTTP/1.1" 200 -
+2026-01-30 21:33:23,875 - INFO - 127.0.0.1 - - [30/Jan/2026 21:33:23] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-01-30 21:33:25,026 - INFO - 127.0.0.1 - - [30/Jan/2026 21:33:25] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-01-30 21:33:31,597 - INFO - 127.0.0.1 - - [30/Jan/2026 21:33:31] "GET /login HTTP/1.1" 200 -
+2026-01-30 21:33:31,648 - INFO - 127.0.0.1 - - [30/Jan/2026 21:33:31] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-30 21:33:31,649 - INFO - 127.0.0.1 - - [30/Jan/2026 21:33:31] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-01-30 21:34:06,630 - INFO - 127.0.0.1 - - [30/Jan/2026 21:34:06] "GET / HTTP/1.1" 200 -
+2026-01-30 21:34:07,005 - INFO - 127.0.0.1 - - [30/Jan/2026 21:34:07] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-01-30 21:34:07,040 - INFO - 127.0.0.1 - - [30/Jan/2026 21:34:07] "GET /static/js/main.js HTTP/1.1" 200 -
+2026-01-30 21:34:08,877 - INFO - 127.0.0.1 - - [30/Jan/2026 21:34:08] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-01-30 21:34:56,122 - INFO - Model, preprocessor, and dataset loaded successfully.
+2026-01-30 21:34:56,158 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.89.249.78:5000
+2026-01-30 21:34:56,158 - INFO - [33mPress CTRL+C to quit[0m
+2026-01-30 21:34:56,160 - INFO -  * Restarting with stat
+2026-01-30 21:34:58,522 - INFO - Model, preprocessor, and dataset loaded successfully.
+2026-01-30 21:34:58,536 - WARNING -  * Debugger is active!
+2026-01-30 21:34:58,543 - INFO -  * Debugger PIN: 125-407-473
+2026-01-30 21:34:59,321 - INFO - 127.0.0.1 - - [30/Jan/2026 21:34:59] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-01-30 21:34:59,329 - INFO - 127.0.0.1 - - [30/Jan/2026 21:34:59] "[32mGET /dashboard HTTP/1.1[0m" 302 -
+2026-01-30 21:34:59,373 - INFO - 127.0.0.1 - - [30/Jan/2026 21:34:59] "[35m[1mGET /admin/dashboard HTTP/1.1[0m" 500 -
+2026-01-30 21:34:59,420 - INFO - 127.0.0.1 - - [30/Jan/2026 21:34:59] "GET /admin/dashboard?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2026-01-30 21:34:59,421 - INFO - 127.0.0.1 - - [30/Jan/2026 21:34:59] "GET /admin/dashboard?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2026-01-30 21:34:59,448 - INFO - 127.0.0.1 - - [30/Jan/2026 21:34:59] "GET /admin/dashboard?__debugger__=yes&cmd=resource&f=console.png&s=rFobpkWNqjd1z23ELVyq HTTP/1.1" 200 -
+2026-01-30 21:34:59,469 - INFO - 127.0.0.1 - - [30/Jan/2026 21:34:59] "GET /admin/dashboard?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2026-01-30 21:35:42,279 - INFO - 127.0.0.1 - - [30/Jan/2026 21:35:42] "GET /?id=5d762730-3b9a-42d6-9bd1-bb78d1fd7676&vscodeBrowserReqId=1769789142270 HTTP/1.1" 200 -
+2026-01-30 21:35:43,854 - INFO - 127.0.0.1 - - [30/Jan/2026 21:35:43] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-01-30 21:35:43,854 - INFO - 127.0.0.1 - - [30/Jan/2026 21:35:43] "GET /static/js/main.js HTTP/1.1" 200 -
+2026-01-30 21:38:50,243 - INFO - 127.0.0.1 - - [30/Jan/2026 21:38:50] "GET /login HTTP/1.1" 200 -
+2026-01-30 21:38:50,256 - INFO - 127.0.0.1 - - [30/Jan/2026 21:38:50] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-30 21:38:50,257 - INFO - 127.0.0.1 - - [30/Jan/2026 21:38:50] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-01-30 21:38:55,393 - INFO - 127.0.0.1 - - [30/Jan/2026 21:38:55] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-01-30 21:38:55,398 - INFO - 127.0.0.1 - - [30/Jan/2026 21:38:55] "[32mGET /dashboard HTTP/1.1[0m" 302 -
+2026-01-30 21:38:55,403 - INFO - 127.0.0.1 - - [30/Jan/2026 21:38:55] "GET /login HTTP/1.1" 200 -
+2026-01-30 21:38:55,414 - INFO - 127.0.0.1 - - [30/Jan/2026 21:38:55] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-30 21:38:55,414 - INFO - 127.0.0.1 - - [30/Jan/2026 21:38:55] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-01-30 21:39:01,125 - INFO - 127.0.0.1 - - [30/Jan/2026 21:39:01] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-01-30 21:39:01,131 - INFO - 127.0.0.1 - - [30/Jan/2026 21:39:01] "[32mGET /dashboard HTTP/1.1[0m" 302 -
+2026-01-30 21:39:01,135 - INFO - 127.0.0.1 - - [30/Jan/2026 21:39:01] "GET /login HTTP/1.1" 200 -
+2026-01-30 21:39:01,148 - INFO - 127.0.0.1 - - [30/Jan/2026 21:39:01] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-30 21:39:01,149 - INFO - 127.0.0.1 - - [30/Jan/2026 21:39:01] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-01-30 21:39:05,761 - INFO - 127.0.0.1 - - [30/Jan/2026 21:39:05] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-01-30 21:39:05,766 - INFO - 127.0.0.1 - - [30/Jan/2026 21:39:05] "[32mGET /dashboard HTTP/1.1[0m" 302 -
+2026-01-30 21:39:05,770 - INFO - 127.0.0.1 - - [30/Jan/2026 21:39:05] "GET /login HTTP/1.1" 200 -
+2026-01-30 21:39:05,782 - INFO - 127.0.0.1 - - [30/Jan/2026 21:39:05] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-01-30 21:39:05,782 - INFO - 127.0.0.1 - - [30/Jan/2026 21:39:05] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:12:29,551 - INFO - Model, preprocessor, and dataset loaded successfully.
+2026-02-01 19:12:29,630 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.89.249.78:5000
+2026-02-01 19:12:29,631 - INFO - [33mPress CTRL+C to quit[0m
+2026-02-01 19:12:29,634 - INFO -  * Restarting with stat
+2026-02-01 19:12:31,767 - INFO - Model, preprocessor, and dataset loaded successfully.
+2026-02-01 19:12:31,781 - WARNING -  * Debugger is active!
+2026-02-01 19:12:31,789 - INFO -  * Debugger PIN: 125-407-473
+2026-02-01 19:18:21,357 - INFO - Model, preprocessor, and dataset loaded successfully.
+2026-02-01 19:18:21,401 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.89.249.78:5000
+2026-02-01 19:18:21,401 - INFO - [33mPress CTRL+C to quit[0m
+2026-02-01 19:18:21,403 - INFO -  * Restarting with stat
+2026-02-01 19:18:23,551 - INFO - Model, preprocessor, and dataset loaded successfully.
+2026-02-01 19:18:23,567 - WARNING -  * Debugger is active!
+2026-02-01 19:18:23,575 - INFO -  * Debugger PIN: 125-407-473
+2026-02-01 19:18:27,359 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:27] "GET / HTTP/1.1" 200 -
+2026-02-01 19:18:27,656 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:27] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:18:27,662 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:27] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:18:27,920 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:27] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-02-01 19:18:36,636 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:36] "GET /login HTTP/1.1" 200 -
+2026-02-01 19:18:36,675 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:36] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:18:36,677 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:36] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:18:46,051 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:46] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-01 19:18:46,058 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:46] "[32mGET /dashboard HTTP/1.1[0m" 302 -
+2026-02-01 19:18:46,443 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:46] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-01 19:18:46,481 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:46] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:18:46,486 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:46] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:18:49,180 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:49] "GET /admin/users HTTP/1.1" 200 -
+2026-02-01 19:18:49,214 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:49] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:18:49,216 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:49] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:18:58,847 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:58] "GET /admin/audit-log HTTP/1.1" 200 -
+2026-02-01 19:18:58,883 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:58] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:18:58,884 - INFO - 127.0.0.1 - - [01/Feb/2026 19:18:58] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:19:01,852 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:01] "GET /admin/model-info HTTP/1.1" 200 -
+2026-02-01 19:19:01,889 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:01] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:19:01,890 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:01] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:19:03,086 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:03] "GET /transactions HTTP/1.1" 200 -
+2026-02-01 19:19:03,121 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:03] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:19:03,122 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:03] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:19:15,973 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:15] "GET /fraud-alerts HTTP/1.1" 200 -
+2026-02-01 19:19:16,014 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:16] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:19:17,878 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:17] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:19:20,261 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:20] "GET /analytics HTTP/1.1" 200 -
+2026-02-01 19:19:20,337 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:20] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:19:20,340 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:20] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:19:31,384 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:31] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-02-01 19:19:31,434 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:31] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:19:31,435 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:31] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:19:34,756 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:34] "GET /admin/users HTTP/1.1" 200 -
+2026-02-01 19:19:34,799 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:34] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:19:34,802 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:34] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:19:36,209 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:36] "GET /admin/audit-log HTTP/1.1" 200 -
+2026-02-01 19:19:36,246 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:36] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:19:36,248 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:36] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:19:43,047 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:43] "GET /admin/model-info HTTP/1.1" 200 -
+2026-02-01 19:19:43,081 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:43] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:19:43,082 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:43] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:19:53,990 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:53] "GET /login HTTP/1.1" 200 -
+2026-02-01 19:19:54,149 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:54] "[32mGET / HTTP/1.1[0m" 302 -
+2026-02-01 19:19:54,158 - INFO - 127.0.0.1 - - [01/Feb/2026 19:19:54] "[32mGET /dashboard HTTP/1.1[0m" 302 -
+2026-02-01 19:20:02,517 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:02] "GET /login HTTP/1.1" 200 -
+2026-02-01 19:20:02,545 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:02] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:20:02,546 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:02] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:20:08,895 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:08] "GET / HTTP/1.1" 200 -
+2026-02-01 19:20:08,951 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:08] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:20:08,969 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:08] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:20:09,216 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:09] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-02-01 19:20:10,996 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:10] "GET /login HTTP/1.1" 200 -
+2026-02-01 19:20:11,035 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:11] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:20:11,036 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:11] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:20:14,528 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:14] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-02-01 19:20:14,621 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:14] "GET /dashboard HTTP/1.1" 200 -
+2026-02-01 19:20:14,665 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:14] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:20:14,667 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:14] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:20:16,410 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:16] "GET /transactions HTTP/1.1" 200 -
+2026-02-01 19:20:16,449 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:16] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:20:16,450 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:16] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:20:26,863 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:26] "GET /fraud-alerts HTTP/1.1" 200 -
+2026-02-01 19:20:26,903 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:26] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:20:26,904 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:26] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:20:28,004 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:28] "GET /analytics HTTP/1.1" 200 -
+2026-02-01 19:20:28,041 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:28] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:20:28,042 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:28] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 19:20:29,037 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:29] "GET /dashboard HTTP/1.1" 200 -
+2026-02-01 19:20:29,087 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:29] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-02-01 19:20:29,089 - INFO - 127.0.0.1 - - [01/Feb/2026 19:20:29] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2026-02-01 21:10:53,347 - INFO -  * Detected change in 'C:\\Users\\jayaprakash.k\\OneDrive\\Documents\\GitHub\\Credit_Card_Fraud_Detection\\app.py', reloading
+2026-02-01 21:10:53,849 - INFO -  * Restarting with stat

@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+
+{% block title %}Analyze Transaction - FraudGuard{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Page Header -->
+    <div class="mb-4">
+        <h2 class="mb-1">Analyze Transaction</h2>
+        <p class="text-muted mb-0">Enter transaction details to check if it's spam or legitimate</p>
+    </div>
+    
+    <div class="row g-4">
+        <!-- Input Form -->
+        <div class="col-md-6">
+            <div class="table-card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Transaction Details</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('analyze') }}">
+                        <div class="mb-3">
+                            <label class="form-label">Sender Name</label>
+                            <input type="text" class="form-control" name="sender_name" 
+                                   placeholder="e.g., John Smith" required
+                                   value="{{ result.sender_name if result else '' }}">
+                            <small class="text-muted">Names with "Suspicious" or "Anonymous" will be flagged</small>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Sender Location</label>
+                            <select class="form-select" name="sender_location" required>
+                                <option value="">Select location...</option>
+                                <option value="New York" {% if result and result.sender_location == 'New York' %}selected{% endif %}>New York, USA</option>
+                                <option value="Los Angeles" {% if result and result.sender_location == 'Los Angeles' %}selected{% endif %}>Los Angeles, USA</option>
+                                <option value="Chicago" {% if result and result.sender_location == 'Chicago' %}selected{% endif %}>Chicago, USA</option>
+                                <option value="Mumbai" {% if result and result.sender_location == 'Mumbai' %}selected{% endif %}>Mumbai, India</option>
+                                <option value="Delhi" {% if result and result.sender_location == 'Delhi' %}selected{% endif %}>Delhi, India</option>
+                                <option value="London" {% if result and result.sender_location == 'London' %}selected{% endif %}>London, UK</option>
+                                <option value="Tokyo" {% if result and result.sender_location == 'Tokyo' %}selected{% endif %}>Tokyo, Japan</option>
+                                <option value="Dubai" {% if result and result.sender_location == 'Dubai' %}selected{% endif %}>Dubai, UAE</option>
+                                <option value="Unknown Location" {% if result and result.sender_location == 'Unknown Location' %}selected{% endif %}>⚠️ Unknown Location</option>
+                                <option value="Suspicious IP" {% if result and result.sender_location == 'Suspicious IP' %}selected{% endif %}>🚨 Suspicious IP / VPN</option>
+                            </select>
+                            <small class="text-muted">"Unknown Location" and "Suspicious IP" are flagged as unauthorized</small>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Receiver Name</label>
+                            <input type="text" class="form-control" name="receiver_name" 
+                                   placeholder="e.g., Amazon Store" required
+                                   value="{{ result.receiver_name if result else '' }}">
+                            <small class="text-muted">Offshore accounts, Crypto exchanges are flagged</small>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Receiver Location</label>
+                            <input type="text" class="form-control" name="receiver_location" 
+                                   placeholder="e.g., New York, USA" required
+                                   value="{{ result.receiver_location if result else '' }}">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label">Transaction Amount ($)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" class="form-control" name="amount" 
+                                       placeholder="0.00" step="0.01" min="0" required
+                                       value="{{ result.amount if result else '' }}">
+                            </div>
+                            <small class="text-muted">Amounts > $5,000 are flagged, > $10,000 high risk</small>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-search me-2"></i>Analyze Transaction
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Quick Test Examples -->
+            <div class="table-card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="bi bi-lightning me-2"></i>Quick Test Examples</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted small">Click to auto-fill and test:</p>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-success btn-sm text-start" onclick="fillExample('legitimate')">
+                            <i class="bi bi-check-circle me-2"></i>
+                            <strong>Legitimate:</strong> John Smith, New York → Amazon Store, $150
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm text-start" onclick="fillExample('location')">
+                            <i class="bi bi-geo-alt me-2"></i>
+                            <strong>Unauthorized Location:</strong> Jane Doe, Unknown Location → Walmart, $500
+                        </button>
+                        <button class="btn btn-outline-warning btn-sm text-start" onclick="fillExample('amount')">
+                            <i class="bi bi-currency-dollar me-2"></i>
+                            <strong>High Amount:</strong> Mike Wilson, Chicago → Offshore Account, $15,000
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm text-start" onclick="fillExample('suspicious')">
+                            <i class="bi bi-person-exclamation me-2"></i>
+                            <strong>Suspicious Account:</strong> Anonymous_User, Suspicious IP → Crypto Exchange, $8,000
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Result -->
+        <div class="col-md-6">
+            {% if result %}
+            <div class="table-card">
+                <div class="card-header bg-{{ 'danger' if result.is_fraud else 'success' }} text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-shield-{{ 'exclamation' if result.is_fraud else 'check' }} me-2"></i>
+                        Analysis Result
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Status Badge -->
+                    <div class="text-center py-4">
+                        {% if result.is_fraud %}
+                        <div class="display-1 text-danger mb-3">
+                            <i class="bi bi-exclamation-octagon"></i>
+                        </div>
+                        <h2 class="text-danger">SPAM / FRAUD</h2>
+                        <p class="text-muted">This transaction appears to be fraudulent</p>
+                        {% else %}
+                        <div class="display-1 text-success mb-3">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+                        <h2 class="text-success">LEGITIMATE</h2>
+                        <p class="text-muted">This transaction appears to be valid</p>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Risk Score -->
+                    <div class="bg-light rounded p-4 mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>Risk Score</span>
+                            <span class="fw-bold {% if result.risk_score >= 50 %}text-danger{% else %}text-success{% endif %}">
+                                {{ result.risk_score }}%
+                            </span>
+                        </div>
+                        <div class="progress" style="height: 10px;">
+                            <div class="progress-bar {% if result.risk_score >= 50 %}bg-danger{% else %}bg-success{% endif %}" 
+                                 style="width: {{ result.risk_score }}%"></div>
+                        </div>
+                        <small class="text-muted">Score ≥ 50% = Fraud/Spam</small>
+                    </div>
+                    
+                    <!-- Transaction Summary -->
+                    <h6 class="mb-3">Transaction Summary</h6>
+                    <table class="table table-sm">
+                        <tr>
+                            <td class="text-muted">Sender:</td>
+                            <td class="fw-bold">{{ result.sender_name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted">From:</td>
+                            <td>
+                                {% if result.sender_location in ['Unknown Location', 'Suspicious IP'] %}
+                                <span class="badge bg-danger">{{ result.sender_location }}</span>
+                                {% else %}
+                                {{ result.sender_location }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted">Receiver:</td>
+                            <td>{{ result.receiver_name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted">Amount:</td>
+                            <td class="fw-bold {% if result.amount > 5000 %}text-danger{% endif %}">
+                                ${{ "{:,.2f}".format(result.amount) }}
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Risk Factors -->
+                    <h6 class="mb-3">Risk Analysis</h6>
+                    <ul class="list-group">
+                        {% for factor in result.risk_factors %}
+                        <li class="list-group-item">{{ factor }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% else %}
+            <div class="table-card">
+                <div class="card-body text-center py-5">
+                    <i class="bi bi-search display-1 text-muted mb-3"></i>
+                    <h4>Enter Transaction Details</h4>
+                    <p class="text-muted">Fill in the form to analyze if a transaction is spam or legitimate</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function fillExample(type) {
+    const form = document.querySelector('form');
+    
+    switch(type) {
+        case 'legitimate':
+            form.sender_name.value = 'John Smith';
+            form.sender_location.value = 'New York';
+            form.receiver_name.value = 'Amazon Store';
+            form.receiver_location.value = 'Seattle, USA';
+            form.amount.value = '150.00';
+            break;
+        case 'location':
+            form.sender_name.value = 'Jane Doe';
+            form.sender_location.value = 'Unknown Location';
+            form.receiver_name.value = 'Walmart';
+            form.receiver_location.value = 'Texas, USA';
+            form.amount.value = '500.00';
+            break;
+        case 'amount':
+            form.sender_name.value = 'Mike Wilson';
+            form.sender_location.value = 'Chicago';
+            form.receiver_name.value = 'Offshore Account';
+            form.receiver_location.value = 'Cayman Islands';
+            form.amount.value = '15000.00';
+            break;
+        case 'suspicious':
+            form.sender_name.value = 'Anonymous_User_123';
+            form.sender_location.value = 'Suspicious IP';
+            form.receiver_name.value = 'Crypto Exchange';
+            form.receiver_location.value = 'Unknown';
+            form.amount.value = '8000.00';
+            break;
+    }
+}
+</script>
+{% endblock %}

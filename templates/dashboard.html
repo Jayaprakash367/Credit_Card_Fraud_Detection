@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - FraudGuard{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="mb-1">Dashboard</h2>
+            <p class="text-muted mb-0">Transaction fraud detection overview</p>
+        </div>
+        <a href="{{ url_for('analyze') }}" class="btn btn-primary">
+            <i class="bi bi-plus-lg me-2"></i>Analyze New Transaction
+        </a>
+    </div>
+    
+    <!-- Stats Cards -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <div class="stat-value">{{ stats.total_transactions }}</div>
+                        <div class="stat-label">Total Transactions</div>
+                    </div>
+                    <div class="stat-icon bg-primary bg-opacity-10 text-primary">
+                        <i class="bi bi-receipt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <div class="stat-value text-danger">{{ stats.fraud_count }}</div>
+                        <div class="stat-label">Fraud Detected</div>
+                    </div>
+                    <div class="stat-icon bg-danger bg-opacity-10 text-danger">
+                        <i class="bi bi-exclamation-triangle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <div class="stat-value text-warning">{{ stats.fraud_rate }}%</div>
+                        <div class="stat-label">Fraud Rate</div>
+                    </div>
+                    <div class="stat-icon bg-warning bg-opacity-10 text-warning">
+                        <i class="bi bi-percent"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <div class="stat-value text-success">${{ "{:,.0f}".format(stats.fraud_amount) }}</div>
+                        <div class="stat-label">Fraud Amount</div>
+                    </div>
+                    <div class="stat-icon bg-success bg-opacity-10 text-success">
+                        <i class="bi bi-currency-dollar"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row g-4">
+        <!-- Fraud by Reason Chart -->
+        <div class="col-md-6">
+            <div class="table-card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="bi bi-pie-chart me-2"></i>Fraud by Reason</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="fraudReasonChart" height="250"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Unauthorized Locations -->
+        <div class="col-md-6">
+            <div class="table-card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="bi bi-geo-alt text-danger me-2"></i>Unauthorized Locations</h5>
+                </div>
+                <div class="card-body">
+                    {% if stats.unauthorized_locations %}
+                    <div class="list-group list-group-flush">
+                        {% for location, count in stats.unauthorized_locations.items() %}
+                        <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                            <span>
+                                <i class="bi bi-geo-alt-fill text-danger me-2"></i>
+                                {{ location }}
+                            </span>
+                            <span class="badge bg-danger rounded-pill">{{ count }} transactions</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p class="text-muted text-center py-4">No unauthorized location detected</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row g-4 mt-2">
+        <!-- Suspicious Accounts -->
+        <div class="col-md-6">
+            <div class="table-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="bi bi-person-exclamation text-warning me-2"></i>Suspicious Accounts</h5>
+                    <a href="{{ url_for('suspicious_accounts') }}" class="btn btn-sm btn-outline-primary">View All</a>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Account Name</th>
+                                <th>Fraud Count</th>
+                                <th>Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for account in stats.suspicious_accounts %}
+                            <tr>
+                                <td>
+                                    <i class="bi bi-person-fill text-warning me-2"></i>
+                                    {{ account.Account }}
+                                </td>
+                                <td><span class="badge bg-danger">{{ account.FraudCount }}</span></td>
+                                <td>${{ "{:,.2f}".format(account.TotalAmount) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Fraud Transactions -->
+        <div class="col-md-6">
+            <div class="table-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="bi bi-clock-history text-danger me-2"></i>Recent Fraud Transactions</h5>
+                    <a href="{{ url_for('transactions') }}?filter=fraud" class="btn btn-sm btn-outline-danger">View All</a>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>Sender</th>
+                                <th>Amount</th>
+                                <th>Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for txn in stats.recent_fraud[:5] %}
+                            <tr>
+                                <td>
+                                    <a href="{{ url_for('transaction_detail', transaction_id=txn.TransactionID) }}" class="text-primary">
+                                        {{ txn.TransactionID }}
+                                    </a>
+                                </td>
+                                <td>{{ txn.SenderName[:15] }}...</td>
+                                <td>${{ "{:,.2f}".format(txn.Amount) }}</td>
+                                <td><span class="badge badge-fraud">{{ txn.FraudReason }}</span></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Fraud by Reason Chart
+const fraudReasonCtx = document.getElementById('fraudReasonChart').getContext('2d');
+const fraudReasonData = {{ stats.fraud_by_reason | tojson }};
+
+new Chart(fraudReasonCtx, {
+    type: 'doughnut',
+    data: {
+        labels: Object.keys(fraudReasonData),
+        datasets: [{
+            data: Object.values(fraudReasonData),
+            backgroundColor: [
+                '#dc2626',
+                '#f59e0b',
+                '#2563eb',
+                '#16a34a'
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    padding: 20,
+                    usePointStyle: true
+                }
+            }
+        }
+    }
+});
+</script>
+{% endblock %}

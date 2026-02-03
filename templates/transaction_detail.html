@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+
+{% block title %}Transaction Details - FraudGuard{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Back Button -->
+    <a href="{{ url_for('transactions') }}" class="btn btn-outline-secondary mb-4">
+        <i class="bi bi-arrow-left me-2"></i>Back to Transactions
+    </a>
+    
+    <!-- Transaction Header -->
+    <div class="table-card mb-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h3 class="mb-1">{{ transaction.TransactionID }}</h3>
+                    <p class="text-muted mb-0">{{ transaction.Timestamp }}</p>
+                </div>
+                <div>
+                    {% if transaction.IsFraud %}
+                    <span class="badge bg-danger fs-5 px-4 py-2">
+                        <i class="bi bi-exclamation-triangle me-2"></i>SPAM / FRAUD DETECTED
+                    </span>
+                    {% else %}
+                    <span class="badge bg-success fs-5 px-4 py-2">
+                        <i class="bi bi-check-circle me-2"></i>LEGITIMATE TRANSACTION
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row g-4">
+        <!-- Transaction Details -->
+        <div class="col-md-8">
+            <div class="table-card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="bi bi-info-circle me-2"></i>Transaction Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-3">Sender Information</h6>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td class="text-muted">Name:</td>
+                                    <td class="fw-bold {% if 'Suspicious' in transaction.SenderName or 'Anonymous' in transaction.SenderName %}text-danger{% endif %}">
+                                        {{ transaction.SenderName }}
+                                        {% if 'Suspicious' in transaction.SenderName or 'Anonymous' in transaction.SenderName %}
+                                        <i class="bi bi-exclamation-triangle text-danger ms-1"></i>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted">Location:</td>
+                                    <td>
+                                        {% if transaction.SenderLocation in ['Unknown Location', 'Suspicious IP'] %}
+                                        <span class="badge bg-danger">
+                                            <i class="bi bi-exclamation-triangle me-1"></i>{{ transaction.SenderLocation }}
+                                        </span>
+                                        {% else %}
+                                        <i class="bi bi-geo-alt me-1"></i>{{ transaction.SenderLocation }}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted">Country:</td>
+                                    <td>{{ transaction.SenderCountry }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-3">Receiver Information</h6>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td class="text-muted">Name:</td>
+                                    <td class="fw-bold">{{ transaction.ReceiverName }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted">Location:</td>
+                                    <td><i class="bi bi-geo-alt me-1"></i>{{ transaction.ReceiverLocation }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="text-center p-3 bg-light rounded">
+                                <h6 class="text-muted mb-2">Amount</h6>
+                                <h3 class="{% if transaction.Amount > 5000 %}text-danger{% else %}text-success{% endif %}">
+                                    ${{ "{:,.2f}".format(transaction.Amount) }}
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center p-3 bg-light rounded">
+                                <h6 class="text-muted mb-2">Distance</h6>
+                                <h3>{{ "{:,.0f}".format(transaction.Distance_KM) }} km</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center p-3 bg-light rounded">
+                                <h6 class="text-muted mb-2">Risk Score</h6>
+                                <h3 class="{% if transaction.RiskScore >= 70 %}text-danger{% elif transaction.RiskScore >= 40 %}text-warning{% else %}text-success{% endif %}">
+                                    {{ transaction.RiskScore }}%
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Risk Analysis -->
+        <div class="col-md-4">
+            <div class="table-card h-100">
+                <div class="card-header bg-{{ 'danger' if transaction.IsFraud else 'success' }} text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-shield-{{ 'exclamation' if transaction.IsFraud else 'check' }} me-2"></i>
+                        Risk Analysis
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Risk Score Gauge -->
+                    <div class="text-center mb-4">
+                        <div class="position-relative d-inline-block">
+                            <svg viewBox="0 0 100 50" width="200">
+                                <path d="M5,50 A45,45 0 0,1 95,50" fill="none" stroke="#e2e8f0" stroke-width="8"/>
+                                <path d="M5,50 A45,45 0 0,1 95,50" fill="none" 
+                                      stroke="{% if transaction.RiskScore >= 70 %}#dc2626{% elif transaction.RiskScore >= 40 %}#f59e0b{% else %}#16a34a{% endif %}" 
+                                      stroke-width="8"
+                                      stroke-dasharray="{{ transaction.RiskScore * 1.42 }}, 142"/>
+                            </svg>
+                            <div class="position-absolute top-50 start-50 translate-middle mt-3">
+                                <h2 class="mb-0">{{ transaction.RiskScore }}%</h2>
+                                <small class="text-muted">Risk Score</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {% if transaction.IsFraud %}
+                    <div class="alert alert-danger">
+                        <h6 class="alert-heading"><i class="bi bi-exclamation-triangle me-2"></i>Fraud Reason</h6>
+                        <p class="mb-0">{{ transaction.FraudReason }}</p>
+                    </div>
+                    
+                    <h6 class="mb-3">Risk Factors Detected:</h6>
+                    <ul class="list-group list-group-flush">
+                        {% if transaction.SenderLocation in ['Unknown Location', 'Suspicious IP'] %}
+                        <li class="list-group-item px-0">
+                            <i class="bi bi-geo-alt text-danger me-2"></i>
+                            Unauthorized sender location
+                        </li>
+                        {% endif %}
+                        {% if transaction.Amount > 5000 %}
+                        <li class="list-group-item px-0">
+                            <i class="bi bi-currency-dollar text-danger me-2"></i>
+                            High transaction amount
+                        </li>
+                        {% endif %}
+                        {% if 'Suspicious' in transaction.SenderName or 'Anonymous' in transaction.SenderName %}
+                        <li class="list-group-item px-0">
+                            <i class="bi bi-person-exclamation text-danger me-2"></i>
+                            Suspicious account name
+                        </li>
+                        {% endif %}
+                        {% if 'Offshore' in transaction.ReceiverName or 'Crypto' in transaction.ReceiverName or 'Unknown' in transaction.ReceiverName %}
+                        <li class="list-group-item px-0">
+                            <i class="bi bi-shop text-danger me-2"></i>
+                            Suspicious receiver type
+                        </li>
+                        {% endif %}
+                    </ul>
+                    {% else %}
+                    <div class="alert alert-success">
+                        <h6 class="alert-heading"><i class="bi bi-check-circle me-2"></i>Transaction Valid</h6>
+                        <p class="mb-0">No suspicious patterns detected in this transaction.</p>
+                    </div>
+                    
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item px-0">
+                            <i class="bi bi-check-circle text-success me-2"></i>
+                            Valid sender location
+                        </li>
+                        <li class="list-group-item px-0">
+                            <i class="bi bi-check-circle text-success me-2"></i>
+                            Normal transaction amount
+                        </li>
+                        <li class="list-group-item px-0">
+                            <i class="bi bi-check-circle text-success me-2"></i>
+                            Legitimate account
+                        </li>
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
