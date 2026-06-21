@@ -2,7 +2,6 @@
 Credit Card Fraud Detection System
 Simple transaction fraud detection based on location and account behavior
 """
-
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 import pandas as pd
 import numpy as np
