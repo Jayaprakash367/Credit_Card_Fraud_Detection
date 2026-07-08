@@ -46,9 +46,7 @@ def generate_sample_data():
         'Online Shopping', 'Utility Company', 'Unknown Merchant', 
         'Offshore Account', 'Crypto Exchange', 'Gaming Platform'
     ]
-    
     transactions = []
-    
     for i in range(1, 201):  # 200 sample transactions
         # Determine if this should be a suspicious transaction (20% fraud rate)
         is_fraud = random.random() < 0.20
